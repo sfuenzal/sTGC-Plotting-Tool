@@ -1,2 +1,6 @@
 *.py~
 *.sh~
+*._0001.1~
+*.root
+*.gitignore~
+sTGC_plotting_tool/InputHistograms/
