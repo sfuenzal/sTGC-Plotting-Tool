@@ -1,11 +1,14 @@
 #!/usr/bin/bash
 
-base_path=/home/Sebastian/sTGC_output_plots
+base_path=$(realpath ../)
+package_path=$base_path
+name_folder_with_input_histograms="InputHistograms" # This folder must be located inside the folder sTGC_plotting_tool (You have to create it first!)
+# Inside that folder you have to put your inputs divided in different folders, where each folders hold input Run 3 ROOT files with histograms
 
-output_plots_path=/home/Sebastian/sTGC_output_plots/plots
-input_ROOT_files_path=/home/Sebastian/sTGC_output_plots/sTGC_plotting_tool/InputHistograms
-organizer_bash_script_path=/home/Sebastian/sTGC_output_plots/OrganizerScript
-python_sTGC_plotting_tool_path=/home/Sebastian/sTGC_output_plots/sTGC_plotting_tool/SourceCode
+output_plots_path=$base_path/plots
+input_ROOT_files_path=$base_path/sTGC_plotting_tool/$name_folder_with_input_histograms
+organizer_bash_script_path=$base_path/OrganizerScript
+python_sTGC_plotting_tool_path=$base_path/sTGC_plotting_tool/SourceCode
 
 sub_folders=("Overview" "Summary")
 sub_sub_folders=("ASide" "CSide")
@@ -69,11 +72,11 @@ elif (( $answer == 2 )); then
 	for j in ${!sub_folders[@]}; do
 	    if [[ ${sub_folders[j]} == "Overview" ]]; then
 		echo "file: "${file_names[i]}", run: "${run_number[i]}", folder: "${sub_folders[j]}
-		python plotting.py --runNumber ${run_number[i]} --inputROOTFile ${file_names[i]} --folder ${sub_folders[j]}  
+		python3 plotting.py --runNumber ${run_number[i]} --inputROOTFile ${file_names[i]} --folder ${sub_folders[j]}  
 	    else
 		for k in ${!sub_sub_folders[@]}; do
 		    echo "file: "${file_names[i]}", run: "${run_number[i]}", folder: "${sub_folders[j]}", side: "${sub_sub_folders[k]}
-		    python plotting.py --runNumber ${run_number[i]} --inputROOTFile ${file_names[i]} --side ${sub_sub_folders[j]} --folder ${sub_folders[k]}
+		    python3 plotting.py --runNumber ${run_number[i]} --inputROOTFile ${file_names[i]} --side ${sub_sub_folders[j]} --folder ${sub_folders[k]}
 		done
 	    fi
 	done
@@ -85,23 +88,4 @@ else
     return
 fi
 
-cd $base_path
-
-#cd $python_sTGC_plotting_tool_path
-
-#for i in ${!run_number[@]}; do
-#    for j in ${!sub_folders[@]}; do
-#	for k in ${!sub_sub_folders[@]}; do
-#	    python3 plotting.py --runNumber ${run_number[$i]} --inputROOTFile ${file_names[$i]} --side ${!sub_folders[j]} --folder ${!sub_sub_folders[k]}
-#	done
-#    done
-#done
-
-
-#cd $organizer_bash_script_path
-
-#mkdir
-#cd
-
-
-#python3 plotting.py --runNumber run_430616 --inputPath /home/sebastian/sTGC_output_plots/sTGC_plotting_tool/InputHistograms/data22_13p6TeV.00430616.physics_Main.merge.HIST.f1259_h388/data22_13p6TeV.00430616.physics_Main.merge.HIST.f1259_h388._0001.1 --side ASide --folder Summary
+cd $package_path
