@@ -5,7 +5,7 @@ import argparse
 import os
 R.gROOT.SetBatch(True)
 
-base_path = "/home/sebastian/gitProjects/sTGC-Plotting-Tool" # Modify accordingly to your machine
+base_path = "/home/Sebastian/sTGC_output_plots" # Modify accordingly to your machine
 
 parser = argparse.ArgumentParser()
 
@@ -18,10 +18,10 @@ args = parser.parse_args()
 ROOT_file_base_dir = None
 
 if (args.folder == "Overview"):
-    ROOT_file_base_dir = "run_" + args.runNumber + "/Muon/MuonRawDataMonitoring/sTgc/Overview"
+    ROOT_file_base_dir = args.runNumber + "/Muon/MuonRawDataMonitoring/sTgc/Overview"
     os.chdir(base_path + "/plots/" + args.inputROOTFile + "/" + args.folder)
 elif (args.folder == "Summary"):
-    ROOT_file_base_dir = "run_" + args.runNumber + "/Muon/MuonRawDataMonitoring/sTgc/" + args.side  + "/" + args.folder
+    ROOT_file_base_dir = args.runNumber + "/Muon/MuonRawDataMonitoring/sTgc/" + args.side  + "/" + args.folder
     os.chdir(base_path + "/plots/" + args.inputROOTFile + "/" + args.folder + "/" + args.side)
     
 input_ROOT_file_path = base_path + "/sTGC_plotting_tool/InputHistograms/inputsOrganized/" + args.inputROOTFile + "._0001.1"

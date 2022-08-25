@@ -72,11 +72,11 @@ elif (( $answer == 2 )); then
 	for j in ${!sub_folders[@]}; do
 	    if [[ ${sub_folders[j]} == "Overview" ]]; then
 		echo "file: "${file_names[i]}", run: "${run_number[i]}", folder: "${sub_folders[j]}
-		python3 plotting.py --runNumber ${run_number[i]} --inputROOTFile ${file_names[i]} --folder ${sub_folders[j]}  
+		python plotting.py --runNumber "run_"${run_number[i]} --inputROOTFile ${file_names[i]} --folder ${sub_folders[j]}  
 	    else
 		for k in ${!sub_sub_folders[@]}; do
 		    echo "file: "${file_names[i]}", run: "${run_number[i]}", folder: "${sub_folders[j]}", side: "${sub_sub_folders[k]}
-		    python3 plotting.py --runNumber ${run_number[i]} --inputROOTFile ${file_names[i]} --side ${sub_sub_folders[j]} --folder ${sub_folders[k]}
+		    python plotting.py --runNumber "run_"${run_number[i]} --inputROOTFile ${file_names[i]} --side ${sub_sub_folders[j]} --folder ${sub_folders[k]}
 		done
 	    fi
 	done
